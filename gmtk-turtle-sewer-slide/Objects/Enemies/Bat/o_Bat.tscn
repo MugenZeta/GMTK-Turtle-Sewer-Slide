@@ -1,3 +1,161 @@
-[gd_scene format=3 uid="uid://ds8q2devw7rsx"]
+[gd_scene load_steps=12 format=3 uid="uid://ds8q2devw7rsx"]
+
+[ext_resource type="Texture2D" uid="uid://cmd6d7bqeltr6" path="res://Assets/Sprites/spr_bat.png" id="1_gradm"]
+[ext_resource type="Texture2D" uid="uid://65y4mohs3y1t" path="res://Assets/Sprites/spr_bat-attack.png" id="2_ksvdm"]
+
+[sub_resource type="Curve2D" id="Curve2D_2sr7d"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 105, 0, 0, 0, 0, 0, 0)
+}
+point_count = 3
+
+[sub_resource type="Animation" id="Animation_bt6q0"]
+resource_name = "Move"
+length = 0.26
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_4nays"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m352y"]
+_data = {
+&"Move": SubResource("Animation_bt6q0"),
+&"RESET": SubResource("Animation_4nays")
+}
+
+[sub_resource type="Animation" id="Animation_5tus3"]
+resource_name = "Attack"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.166667, 0.266667, 0.466667, 0.5, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 5, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.7, 0.733333, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.261799, -1.0472, -0.261799, 0.0, 0.523599, 1.0472, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_vixgv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f0c2p"]
+_data = {
+&"Attack": SubResource("Animation_5tus3"),
+&"RESET": SubResource("Animation_vixgv")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p4h1i"]
+radius = 16.5076
+
+[sub_resource type="Curve2D" id="Curve2D_gradm"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, -8, 22.4006, 14.5522, -22.4006, -14.5522, -60, 85, 3.27016, 7.19435, -3.27016, -7.19435, -109, 0, 8.3389, -0.981048, -8.3389, 0.981048, -116, 0)
+}
+point_count = 5
 
 [node name="OBat" type="Node2D"]
+
+[node name="move" type="Path2D" parent="."]
+curve = SubResource("Curve2D_2sr7d")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="move"]
+
+[node name="move" type="Sprite2D" parent="move/PathFollow2D"]
+visible = false
+texture_filter = 1
+position = Vector2(-3, 12)
+texture = ExtResource("1_gradm")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="move/PathFollow2D/move"]
+libraries = {
+&"": SubResource("AnimationLibrary_m352y")
+}
+
+[node name="attack" type="Sprite2D" parent="move/PathFollow2D"]
+visible = false
+texture_filter = 1
+position = Vector2(-4, 13)
+texture = ExtResource("2_ksvdm")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="move/PathFollow2D/attack"]
+libraries = {
+&"": SubResource("AnimationLibrary_f0c2p")
+}
+
+[node name="Area2D" type="Area2D" parent="move/PathFollow2D"]
+
+[node name="hitbox" type="CollisionShape2D" parent="move/PathFollow2D/Area2D"]
+visible = false
+position = Vector2(-5.5, 6.5)
+shape = SubResource("CircleShape2D_p4h1i")
+debug_color = Color(0.991955, 0, 0.25866, 0.42)
+
+[node name="Attack" type="Path2D" parent="."]
+curve = SubResource("Curve2D_gradm")
