@@ -1,0 +1,22 @@
+This is how the file system is organized.
+When you add anything please make sure to put it in the correct place so if we need to make changes it'll easy to find.
+
+THE RULES FOR ADDING THINGS:
+	Assets ------> ONLY contain any Sprites, Music, SFX (Sound Effects), and Tilesets:
+		1. When adding new things to the respective folders the NAMES must contain the prefix of what it belongs to.
+		EX: spr_Player, ms_Level1, sfx_Boom, ts_Level1 
+		
+	Maps ------>ONLY contain the map scenes in the game:
+		1.When adding a new map make a new scene.
+		2.Name it "m_(map name)"
+		
+	Objects ------>ONLY contain ingame interactable scenes:
+		1.When adding a new object you MUST make a new folder for it. Folder name must be object name (object Name).
+		2.Name the scene "o_(Object Name)"
+	
+	Scripts ------>ONLY contain code:
+		Scripts must be named by :
+			1.what either what they contain. Ex: s_Physics
+			2.what it belongs to. EX: s_Player
+		ALL SCRIPTS MUST START THEIR NAME WITH "s_"
+	  

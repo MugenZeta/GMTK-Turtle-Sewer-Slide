@@ -1,0 +1,139 @@
+[gd_scene load_steps=13 format=3 uid="uid://mc40x1ogiapa"]
+
+[ext_resource type="Script" uid="uid://dxbbfurmnlu1a" path="res://Scripts/s_mouse.gd" id="1_sbie0"]
+[ext_resource type="Texture2D" uid="uid://dmo3l4kvmf7ox" path="res://Assets/Sprites/spr_rat.png" id="2_176hq"]
+[ext_resource type="Texture2D" uid="uid://dumw7hu8pb7cd" path="res://Assets/Sprites/spr_rat_dead.png" id="3_sktsm"]
+
+[sub_resource type="Curve2D" id="Curve2D_l3pxm"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -184, -1, 0, 0, 0, 0, 159, -1, 0, 0, 0, 0, -184, -1)
+}
+point_count = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3drad"]
+size = Vector2(41.625, 8.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7s3kl"]
+size = Vector2(48.5, 7.5)
+
+[sub_resource type="Animation" id="Animation_r45w4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_r0eyn"]
+resource_name = "Walk"
+length = 0.45
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5q2ct"]
+_data = {
+&"RESET": SubResource("Animation_r45w4"),
+&"Walk": SubResource("Animation_r0eyn")
+}
+
+[sub_resource type="Animation" id="Animation_t1r8m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_aqkr5"]
+resource_name = "dead"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-6.28319, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_plvwh"]
+_data = {
+&"RESET": SubResource("Animation_t1r8m"),
+&"dead": SubResource("Animation_aqkr5")
+}
+
+[node name="Path2D" type="Path2D"]
+position = Vector2(179.49, 0)
+scale = Vector2(0.959184, 1)
+curve = SubResource("Curve2D_l3pxm")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+texture_filter = 1
+position = Vector2(-184, -1)
+rotates = false
+
+[node name="OMouse" type="CharacterBody2D" parent="PathFollow2D"]
+position = Vector2(183, 1)
+script = ExtResource("1_sbie0")
+
+[node name="hurtbox" type="CollisionShape2D" parent="PathFollow2D/OMouse"]
+position = Vector2(-198.17, -5)
+shape = SubResource("RectangleShape2D_3drad")
+
+[node name="hitbox" type="CollisionShape2D" parent="PathFollow2D/OMouse"]
+position = Vector2(-198.17, 2)
+shape = SubResource("RectangleShape2D_7s3kl")
+debug_color = Color(0.998382, 0, 0.14346, 0.42)
+
+[node name="Walk" type="Sprite2D" parent="PathFollow2D/OMouse"]
+texture_filter = 1
+position = Vector2(-200.255, -14)
+texture = ExtResource("2_176hq")
+flip_h = true
+hframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PathFollow2D/OMouse/Walk"]
+libraries = {
+&"": SubResource("AnimationLibrary_5q2ct")
+}
+
+[node name="Dead" type="Sprite2D" parent="PathFollow2D/OMouse"]
+visible = false
+texture_filter = 1
+position = Vector2(-172, -1)
+texture = ExtResource("3_sktsm")
+offset = Vector2(0, -10)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PathFollow2D/OMouse/Dead"]
+libraries = {
+&"": SubResource("AnimationLibrary_plvwh")
+}

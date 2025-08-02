@@ -1,0 +1,162 @@
+[gd_scene load_steps=15 format=3 uid="uid://pqrdeb8eiamq"]
+
+[ext_resource type="Script" uid="uid://gocvaajo3e30" path="res://Scripts/s_player.gd" id="1_nr2i3"]
+[ext_resource type="Texture2D" uid="uid://b4bmw0d7xwnoa" path="res://Assets/Sprites/spr_Player_neutral.png" id="2_q6df0"]
+[ext_resource type="Texture2D" uid="uid://uad4k6xemuad" path="res://Assets/Sprites/spr_Player_accel.png" id="3_tk5je"]
+[ext_resource type="Texture2D" uid="uid://do2i32anfcccg" path="res://Assets/Sprites/spr_Player_deccel.png" id="4_vy3ex"]
+
+[sub_resource type="Animation" id="Animation_fewkl"]
+resource_name = "Netural"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_iwms0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8bl3v"]
+_data = {
+&"Netural": SubResource("Animation_fewkl"),
+&"RESET": SubResource("Animation_iwms0")
+}
+
+[sub_resource type="Animation" id="Animation_2rgco"]
+resource_name = "Accelerate"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_3k5et"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cbn5q"]
+_data = {
+&"Accelerate": SubResource("Animation_2rgco"),
+&"RESET": SubResource("Animation_3k5et")
+}
+
+[sub_resource type="Animation" id="Animation_gl3th"]
+resource_name = "Deccelerate"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_qflrq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rx5pb"]
+_data = {
+&"Deccelerate": SubResource("Animation_gl3th"),
+&"RESET": SubResource("Animation_qflrq")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j2bk3"]
+radius = 12.0416
+
+[node name="OPlayer" type="CharacterBody2D"]
+script = ExtResource("1_nr2i3")
+
+[node name="neutral_animation" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-7.56979e-06, -7.7486e-06)
+scale = Vector2(1, 0.96875)
+texture = ExtResource("2_q6df0")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="neutral_animation"]
+libraries = {
+&"": SubResource("AnimationLibrary_8bl3v")
+}
+
+[node name="acceleration_animation" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("3_tk5je")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="acceleration_animation"]
+libraries = {
+&"": SubResource("AnimationLibrary_cbn5q")
+}
+
+[node name="decceleration_animation" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("4_vy3ex")
+hframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="decceleration_animation"]
+libraries = {
+&"": SubResource("AnimationLibrary_rx5pb")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_j2bk3")

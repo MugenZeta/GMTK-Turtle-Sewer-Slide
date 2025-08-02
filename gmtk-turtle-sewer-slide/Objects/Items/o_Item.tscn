@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfjgm4jtvxigm"]
+
+[ext_resource type="Script" uid="uid://cij56o6xlf0k" path="res://Scripts/s_item.gd" id="1_0we72"]
+[ext_resource type="Texture2D" uid="uid://bev57fgg6towc" path="res://Assets/Sprites/spr_healthmelon.png" id="2_x5rpa"]
+[ext_resource type="Texture2D" uid="uid://bek812aes3xdx" path="res://Assets/Sprites/spr_healthlettusn.png" id="3_x5suk"]
+[ext_resource type="Texture2D" uid="uid://bgk4wi0lrsn2f" path="res://Assets/Sprites/spr_barrel.png" id="4_d6a8w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f4jw8"]
+size = Vector2(23, 30)
+
+[node name="OItem" type="Node2D"]
+script = ExtResource("1_0we72")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, -3)
+shape = SubResource("RectangleShape2D_f4jw8")
+
+[node name="watermellon" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(-5, -17)
+texture = ExtResource("2_x5rpa")
+
+[node name="lettus" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(-2, -11)
+texture = ExtResource("3_x5suk")
+
+[node name="toxic_barrel" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(-7, -1)
+texture = ExtResource("4_d6a8w")

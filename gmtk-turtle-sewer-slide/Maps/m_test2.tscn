@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlwnq45x84ye6"]
+
+[ext_resource type="PackedScene" uid="uid://ciolu1hwdu88y" path="res://Objects/Floor/o_Floor.tscn" id="1_j80d2"]
+[ext_resource type="PackedScene" uid="uid://mc40x1ogiapa" path="res://Objects/Enemies/Mouse/o_Mouse.tscn" id="2_26txw"]
+[ext_resource type="PackedScene" uid="uid://bcsliqphm7u4o" path="res://Objects/Camera/o_Player_Camera.tscn" id="3_26txw"]
+
+[node name="MTest2" type="Node"]
+
+[node name="OFloor" parent="." instance=ExtResource("1_j80d2")]
+position = Vector2(769, 1688)
+
+[node name="Mouse" parent="." instance=ExtResource("2_26txw")]
+position = Vector2(657, 79)
+
+[node name="OPlayerCamera" parent="." instance=ExtResource("3_26txw")]
+position = Vector2(516, 32)
+scroll_speed = 0
