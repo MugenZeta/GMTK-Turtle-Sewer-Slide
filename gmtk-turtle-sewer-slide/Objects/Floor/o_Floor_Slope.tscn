@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0bad8u08j2ko"]
+
+[ext_resource type="Texture2D" uid="uid://7ktc7prfpixx" path="res://Assets/TileSets/ts_ Slope.png" id="1_f0gnv"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_7icpj"]
+a = Vector2(10.3467, -10.2133)
+b = Vector2(-10.9867, 11.0933)
+
+[node name="OFloor" type="CharacterBody2D"]
+texture_filter = 1
+position = Vector2(10, 10)
+scale = Vector2(50, 50)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_f0gnv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.56, 1.24)
+scale = Vector2(3, 3)
+shape = SubResource("SegmentShape2D_7icpj")

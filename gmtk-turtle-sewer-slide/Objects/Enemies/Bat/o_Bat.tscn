@@ -47,6 +47,15 @@ _data = {
 &"RESET": SubResource("Animation_4nays")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_p4h1i"]
+radius = 16.5076
+
+[sub_resource type="Curve2D" id="Curve2D_gradm"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, -8, 22.4006, 14.5522, -22.4006, -14.5522, -60, 85, 3.27016, 7.19435, -3.27016, -7.19435, -109, 0, 8.3389, -0.981048, -8.3389, 0.981048, -116, 0)
+}
+point_count = 5
+
 [sub_resource type="Animation" id="Animation_5tus3"]
 resource_name = "Attack"
 length = 0.9
@@ -109,15 +118,6 @@ _data = {
 &"RESET": SubResource("Animation_vixgv")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_p4h1i"]
-radius = 16.5076
-
-[sub_resource type="Curve2D" id="Curve2D_gradm"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, -8, 22.4006, 14.5522, -22.4006, -14.5522, -60, 85, 3.27016, 7.19435, -3.27016, -7.19435, -109, 0, 8.3389, -0.981048, -8.3389, 0.981048, -116, 0)
-}
-point_count = 5
-
 [node name="OBat" type="Node2D"]
 
 [node name="move" type="Path2D" parent="."]
@@ -126,9 +126,8 @@ curve = SubResource("Curve2D_2sr7d")
 [node name="PathFollow2D" type="PathFollow2D" parent="move"]
 
 [node name="move" type="Sprite2D" parent="move/PathFollow2D"]
-visible = false
 texture_filter = 1
-position = Vector2(-3, 12)
+position = Vector2(-1, 7)
 texture = ExtResource("1_gradm")
 hframes = 3
 
@@ -137,25 +136,24 @@ libraries = {
 &"": SubResource("AnimationLibrary_m352y")
 }
 
-[node name="attack" type="Sprite2D" parent="move/PathFollow2D"]
-visible = false
-texture_filter = 1
-position = Vector2(-4, 13)
-texture = ExtResource("2_ksvdm")
-hframes = 6
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="move/PathFollow2D/attack"]
-libraries = {
-&"": SubResource("AnimationLibrary_f0c2p")
-}
-
 [node name="Area2D" type="Area2D" parent="move/PathFollow2D"]
 
 [node name="hitbox" type="CollisionShape2D" parent="move/PathFollow2D/Area2D"]
-visible = false
 position = Vector2(-5.5, 6.5)
 shape = SubResource("CircleShape2D_p4h1i")
 debug_color = Color(0.991955, 0, 0.25866, 0.42)
 
 [node name="Attack" type="Path2D" parent="."]
+visible = false
 curve = SubResource("Curve2D_gradm")
+
+[node name="attack" type="Sprite2D" parent="Attack"]
+texture_filter = 1
+position = Vector2(-1, 7)
+texture = ExtResource("2_ksvdm")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Attack/attack"]
+libraries = {
+&"": SubResource("AnimationLibrary_f0c2p")
+}
