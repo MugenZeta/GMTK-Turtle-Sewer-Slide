@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://ds8q2devw7rsx"]
+[gd_scene load_steps=13 format=3 uid="uid://ds8q2devw7rsx"]
 
 [ext_resource type="Texture2D" uid="uid://cmd6d7bqeltr6" path="res://Assets/Sprites/spr_bat.png" id="1_gradm"]
+[ext_resource type="Script" uid="uid://dw1qkrv7an10q" path="res://Scripts/s_bat.gd" id="1_ksvdm"]
 [ext_resource type="Texture2D" uid="uid://65y4mohs3y1t" path="res://Assets/Sprites/spr_bat-attack.png" id="2_ksvdm"]
 
 [sub_resource type="Curve2D" id="Curve2D_2sr7d"]
@@ -119,26 +120,28 @@ _data = {
 }
 
 [node name="OBat" type="Node2D"]
+script = ExtResource("1_ksvdm")
 
-[node name="move" type="Path2D" parent="."]
+[node name="Move" type="Path2D" parent="."]
 curve = SubResource("Curve2D_2sr7d")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="move"]
+[node name="PathFollow2D" type="PathFollow2D" parent="Move"]
+rotation = 1.56127
 
-[node name="move" type="Sprite2D" parent="move/PathFollow2D"]
+[node name="Move" type="Sprite2D" parent="Move/PathFollow2D"]
 texture_filter = 1
 position = Vector2(-1, 7)
 texture = ExtResource("1_gradm")
 hframes = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="move/PathFollow2D/move"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Move/PathFollow2D/Move"]
 libraries = {
 &"": SubResource("AnimationLibrary_m352y")
 }
 
-[node name="Area2D" type="Area2D" parent="move/PathFollow2D"]
+[node name="Area2D" type="Area2D" parent="Move/PathFollow2D"]
 
-[node name="hitbox" type="CollisionShape2D" parent="move/PathFollow2D/Area2D"]
+[node name="hitbox" type="CollisionShape2D" parent="Move/PathFollow2D/Area2D"]
 position = Vector2(-5.5, 6.5)
 shape = SubResource("CircleShape2D_p4h1i")
 debug_color = Color(0.991955, 0, 0.25866, 0.42)
@@ -147,13 +150,16 @@ debug_color = Color(0.991955, 0, 0.25866, 0.42)
 visible = false
 curve = SubResource("Curve2D_gradm")
 
-[node name="attack" type="Sprite2D" parent="Attack"]
+[node name="PathFollow2D" type="PathFollow2D" parent="Attack"]
+rotation = -1.0122
+
+[node name="Attack" type="Sprite2D" parent="Attack/PathFollow2D"]
 texture_filter = 1
-position = Vector2(-1, 7)
+position = Vector2(-6.46599, 2.86199)
 texture = ExtResource("2_ksvdm")
 hframes = 6
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Attack/attack"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Attack/PathFollow2D/Attack"]
 libraries = {
 &"": SubResource("AnimationLibrary_f0c2p")
 }

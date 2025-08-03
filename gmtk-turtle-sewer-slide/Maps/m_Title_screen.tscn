@@ -1,3 +1,104 @@
-[gd_scene format=3 uid="uid://brbm7ab513e3u"]
+[gd_scene load_steps=10 format=4 uid="uid://brbm7ab513e3u"]
+
+[ext_resource type="Texture2D" uid="uid://dxepwh4agoe5e" path="res://Assets/Sprites/UI_Sprites/ts_floortilebath.png" id="1_tf4vy"]
+[ext_resource type="Texture2D" uid="uid://hfnh7va2a7u5" path="res://Assets/Sprites/UI_Sprites/spr_Title_card.png" id="2_c4y67"]
+[ext_resource type="Texture2D" uid="uid://bug0ajdahrx3e" path="res://Assets/Sprites/UI_Sprites/spr_sink.png" id="3_q2056"]
+[ext_resource type="Texture2D" uid="uid://cv687anxrd6hw" path="res://Assets/Sprites/UI_Sprites/spr_toilet.png" id="4_cmdia"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sfa7f"]
+texture = ExtResource("1_tf4vy")
+texture_region_size = Vector2i(28, 28)
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_j5tld"]
+tile_shape = 2
+tile_size = Vector2i(28, 28)
+sources/0 = SubResource("TileSetAtlasSource_sfa7f")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q2056"]
+texture = ExtResource("1_tf4vy")
+texture_region_size = Vector2i(56, 56)
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cmdia"]
+texture = ExtResource("1_tf4vy")
+texture_region_size = Vector2i(56, 32)
+0:0/0 = 0
+0:33/0 = 0
+0:34/0 = 0
+0:35/0 = 0
+0:36/0 = 0
+0:37/0 = 0
+0:38/0 = 0
+0:39/0 = 0
+0:40/0 = 0
+0:41/0 = 0
+0:42/0 = 0
+0:43/0 = 0
+0:44/0 = 0
+0:45/0 = 0
+0:46/0 = 0
+0:47/0 = 0
+0:48/0 = 0
+0:49/0 = 0
+0:50/0 = 0
+0:51/0 = 0
+0:52/0 = 0
+0:53/0 = 0
+0:54/0 = 0
+0:55/0 = 0
+0:32/0 = 0
+0:31/0 = 0
+0:16/0 = 0
+0:17/0 = 0
+0:18/0 = 0
+0:19/0 = 0
+0:20/0 = 0
+0:21/0 = 0
+0:22/0 = 0
+0:23/0 = 0
+0:24/0 = 0
+0:25/0 = 0
+0:26/0 = 0
+0:27/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_sfa7f"]
+tile_size = Vector2i(56, 56)
+sources/0 = SubResource("TileSetAtlasSource_q2056")
+sources/2 = SubResource("TileSetAtlasSource_cmdia")
 
 [node name="MTitleScreen" type="Node2D"]
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_j5tld")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+texture_filter = 1
+scale = Vector2(3, 3)
+tile_map_data = PackedByteArray("AAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_sfa7f")
+
+[node name="Title" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(622, 385)
+scale = Vector2(4, 4)
+texture = ExtResource("2_c4y67")
+
+[node name="Sink" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(658, 431)
+scale = Vector2(3, 3)
+texture = ExtResource("3_q2056")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(708, 441)
+scale = Vector2(3, 3)
+texture = ExtResource("4_cmdia")
