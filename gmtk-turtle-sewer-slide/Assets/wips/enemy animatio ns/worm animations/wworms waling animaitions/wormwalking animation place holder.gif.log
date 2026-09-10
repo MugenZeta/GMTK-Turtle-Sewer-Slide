@@ -1,0 +1,21 @@
+E:/SteamLibrary/steamapps/common/Krita/krita/bin/ffmpeg.exe -hide_banner -y -y -r 24 -start_number 0 -start_number_range 1 -i E:/gpics/gamestuff/TURTLE/GMTK-Turtle-Sewer-Slide/gmtk-turtle-sewer-slide/Assets/wips/frame%04d.png -i E:/gpics/gamestuff/TURTLE/GMTK-Turtle-Sewer-Slide/gmtk-turtle-sewer-slide/Assets/wips/enemy animatio ns/worm animations/wworms waling animaitions/KritaTempPalettegen_%06d.png -lavfi [0:v][1:v]paletteuse=dither=sierra2_4a:diff_mode=none -f gif -loop 0 -gifflags +transdiff E:/gpics/gamestuff/TURTLE/GMTK-Turtle-Sewer-Slide/gmtk-turtle-sewer-slide/Assets/wips/enemy animatio ns/worm animations/wworms waling animaitions/wormwalking animation place holder.gif
+=====================================================
+Input #0, image2, from 'E:/gpics/gamestuff/TURTLE/GMTK-Turtle-Sewer-Slide/gmtk-turtle-sewer-slide/Assets/wips/frame%04d.png':
+  Duration: 00:00:00.24, start: 0.000000, bitrate: N/A
+  Stream #0:0: Video: png, rgba(pc, gbr/unknown/unknown), 2050x1176 [SAR 3149:3149 DAR 1025:588], 25 fps, 25 tbr, 25 tbn
+Input #1, image2, from 'E:/gpics/gamestuff/TURTLE/GMTK-Turtle-Sewer-Slide/gmtk-turtle-sewer-slide/Assets/wips/enemy animatio ns/worm animations/wworms waling animaitions/KritaTempPalettegen_%06d.png':
+  Duration: 00:00:00.04, start: 0.000000, bitrate: N/A
+  Stream #1:0: Video: png, rgba(pc, gbr/unknown/unknown), 16x16 [SAR 1:1 DAR 1:1], 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 (png) -> paletteuse
+  Stream #1:0 (png) -> paletteuse
+  paletteuse:default -> Stream #0:0 (gif)
+Press [q] to stop, [?] for help
+Output #0, gif, to 'E:/gpics/gamestuff/TURTLE/GMTK-Turtle-Sewer-Slide/gmtk-turtle-sewer-slide/Assets/wips/enemy animatio ns/worm animations/wworms waling animaitions/wormwalking animation place holder.gif':
+  Metadata:
+    encoder         : Lavf62.3.100
+  Stream #0:0: Video: gif, pal8(pc, gbr/unknown/unknown, progressive), 2050x1176 [SAR 1:1 DAR 1025:588], q=2-31, 200 kb/s, 24 fps, 100 tbn
+    Metadata:
+      encoder         : Lavc62.11.100 gif
+[out#0/gif @ 000001d8ab2abec0] video:252KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.007749%
+frame=    6 fps=0.0 q=-0.0 Lsize=     252KiB time=00:00:00.25 bitrate=8259.6kbits/s speed=0.809x elapsed=0:00:00.30    
